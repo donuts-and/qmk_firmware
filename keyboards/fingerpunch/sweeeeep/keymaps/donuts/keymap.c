@@ -1,6 +1,5 @@
 #include QMK_KEYBOARD_H
-#include "g/keymap_combo.h"
-#include "users/callum/oneshot.h"
+
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
@@ -17,6 +16,9 @@ enum keycodes {
     OS_ALT,
     OS_CMD
 };
+
+#include "g/keymap_combo.h"
+#include "users/callum/oneshot.h"
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
@@ -59,10 +61,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_ADJUST] =  LAYOUT_sweeeeep(
-  RGB_TOG, RGB_RMOD, RGB_MOD, _______, _______,     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,
-  RGB_SPI, RGB_HUI,  RGB_SAI, RGB_VAI, _______,     KC_CAPS, KC_F5,   KC_F6,   KC_F7,   KC_F8,  
-  RGB_SPD, RGB_HUD,  RGB_SAD, RGB_VAD, _______,     KC_INS,  KC_F9,   KC_F10,  KC_F11,  KC_F12,
-                     _______, _______, _______,     RESET,   _______, _______
+  RGB_SPI, RGB_HUI, RGB_SAI, RGB_VAI, RGB_MOD,      _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,
+  RGB_SPD, RGB_HUD, RGB_SAD, RGB_VAD, RGB_RMOD,     KC_CAPS, KC_F5,   KC_F6,   KC_F7,   KC_F8,  
+  OS_ALT,  OS_CMD,  OS_SHFT, OS_CTRL, RGB_TOG,      KC_INS,  KC_F9,   KC_F10,  KC_F11,  KC_F12,
+                    _______, _______, _______,      RESET,   _______, _______
 )
 
 };
@@ -131,7 +133,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 #ifdef OLED_ENABLE
 
 void render_layer_state(void) {
-    oled_write_P(PSTR("LAYER: "), false);
+    oled_write_P(PSTR(" LAYER: "), false);
     if (layer_state_is(_ADJUST)) {
         oled_write_ln_P(PSTR("Adjust"), false);
     } else if (layer_state_is(_LOWER)) {
@@ -148,11 +150,12 @@ void render_mod_indicator(const char *data, oneshot_state state) {
 }
 
 void render_mod_state(void) {
-    oled_write_P(PSTR(" MODS: "), false);
-    render_mod_indicator(PSTR("A"), os_alt_state);
-    render_mod_indicator(PSTR("G"), os_cmd_state);
-    render_mod_indicator(PSTR("S"), os_shft_state);
-    render_mod_indicator(PSTR("C"), os_ctrl_state);
+    oled_write_ln_P(PSTR(""), false);
+    oled_write_P(PSTR("  MODS: "), false);
+    render_mod_indicator(PSTR(" A "), os_alt_state);
+    render_mod_indicator(PSTR(" G "), os_cmd_state);
+    render_mod_indicator(PSTR(" S "), os_shft_state);
+    render_mod_indicator(PSTR(" C "), os_ctrl_state);
 }
 
 bool oled_task_user(void) {
@@ -161,7 +164,9 @@ bool oled_task_user(void) {
         render_layer_state();
         render_mod_state();
     } else if (true) {
-        oled_write_P(PSTR("sweeeeep"), false);
+        oled_write_ln_P(PSTR(""), false);
+        oled_write_ln_P(PSTR(""), false);
+        oled_write_P(PSTR("    sweeeeep"), false);
     } else {
         //render_logo_text();
     }

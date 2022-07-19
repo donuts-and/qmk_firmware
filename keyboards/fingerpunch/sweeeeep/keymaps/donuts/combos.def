@@ -8,3 +8,8 @@ COMB(undo, C(KC_Z), KC_Q, KC_J)
 COMB(cut, C(KC_X), KC_J, KC_V)
 COMB(copy, C(KC_C), KC_V, KC_D)
 COMB(paste, C(KC_V), KC_J, KC_V, KC_D)
+
+COMB(osctrl, OS_CTRL, KC_N, KC_H)
+COMB(osshift, OS_SHFT, KC_E, KC_SLSH)
+COMB(osgui, OS_CMD, KC_I, KC_COMM)
+COMB(osalt, OS_ALT, KC_A, KC_DOT)
