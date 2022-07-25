@@ -17,40 +17,19 @@ enum keycodes {
     OS_CMD
 };
 
-#include "g/keymap_combo.h"
-#include "users/callum/oneshot.h"
-
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 
-#define LAYOUT_sweeeeep_base( \
-    K01, K02, K03, K04, K05, K06, K07, K08, K09, K0A, \
-    K11, K12, K13, K14, K15, K16, K17, K18, K19, K1A, \
-    K21, K22, K23, K24, K25, K26, K27, K28, K29, K2A, \
-              K33, K34, K35, K36, K37, K38 \
-  ) \
-  LAYOUT_sweeeeep( \
-        K01,            K02,            K03,            K04,                K05,                K06,                K07,                K08,              K09,            K0A, \
-        LALT_T(K11),    LGUI_T(K12),    LSFT_T(K13),    LCTL_T(K14),        K15,                K16,                RCTL_T(K17),        RSFT_T(K18),      RGUI_T(K19),    RALT_T(K1A), \
-        K21,            K22,            K23,            K24,                K25,                K26,                K27,                K28,              K29,            K2A, \
-                                        K33,            K34,                K35,                K36,                K37,                K38 \
-    )
-
+#include "g/keymap_combo.h"
+#include "users/callum/oneshot.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_CANARY] = LAYOUT_sweeeeep(
-  KC_W,    KC_L,    KC_Y,    KC_P,    KC_B,         KC_Z,    KC_F,    KC_O,    KC_U,    KC_QUOT,
+  KC_W,    KC_L,    KC_Y,    KC_P,    KC_B,         KC_Z,    KC_F,    KC_O,    KC_U,    KC_SCLN,
   KC_C,    KC_R,    KC_S,    KC_T,    KC_G,         KC_M,    KC_N,    KC_E,    KC_I,    KC_A,
   KC_Q,    KC_J,    KC_V,    KC_D,    KC_K,         KC_X,    KC_H,    KC_SLSH, KC_COMM, KC_DOT,
-                    LOWER,   KC_LSFT, KC_TAB,       KC_SCLN, KC_SPC,  RAISE
-),
-
-[_RAISE] = LAYOUT_sweeeeep(
-  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
-  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
-  KC_LBRC,KC_RBRC,  KC_LCBR, KC_RCBR, KC_GRV,       KC_BSLS, OS_CTRL, OS_SHFT, OS_CMD,  OS_ALT,
-                    _______, _______, KC_DOT,       _______, _______, _______
+                    LOWER,   KC_LSFT, KC_TAB,       KC_QUOT, KC_SPC,  RAISE
 ),
 
 [_LOWER] = LAYOUT_sweeeeep(
@@ -58,6 +37,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LALT, KC_LGUI, KC_LSFT, KC_LCTL, _______,      KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC,
   OS_ALT,  OS_CMD,  OS_SHFT, OS_CTRL, _______,      _______, _______, _______, _______, _______,
                     _______, _______, _______,      _______, _______, _______
+),
+
+[_RAISE] = LAYOUT_sweeeeep(
+  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,
+  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
+  KC_LBRC,KC_RBRC,  KC_LCBR, KC_RCBR, KC_GRV,       KC_BSLS, KC_LPRN, KC_RPRN, _______, _______,
+                    _______, _______, KC_DOT,       _______, _______, _______
 ),
 
 [_ADJUST] =  LAYOUT_sweeeeep(
