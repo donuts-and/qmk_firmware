@@ -4,6 +4,7 @@
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
     _CANARY,
+    _SEMI,
     _LOWER,
     _RAISE,
     _ADJUST
@@ -38,6 +39,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
+[_SEMI] = LAYOUT_sweeeeep(
+//╭─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+    KC_F,     KC_L,     KC_H,     KC_V,     KC_Z,                              KC_QUOT,  KC_W,     KC_U,     KC_O,     KC_Y,
+//├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
+    KC_S,     KC_R,     KC_N,     KC_T,     KC_K,                              KC_C,     KC_D,     KC_E,     KC_A,     KC_I,
+//├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
+    KC_X,     KC_J,     KC_B,     KC_M,     KC_Q,                              KC_P,     KC_G,     KC_COMM,  KC_DOT,   KC_SLSH,
+//╰─────────┴─────────┼─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┼─────────┴─────────╯
+                                  LOWER,    KC_LSFT,  KC_TAB,        KC_SCLN,  KC_SPC,   RAISE
+//                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
+),
+
 [_LOWER] = LAYOUT_sweeeeep(
 //╭─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────╮
     KC_ESC,   _______,  _______,  _______,  _______,                           KC_PGUP,  KC_HOME,  KC_UP,    KC_END,   KC_DEL,
@@ -52,11 +65,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_RAISE] = LAYOUT_sweeeeep(
 //╭─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────╮
-    KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,                           KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,
+    KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,                           KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_MINS,  KC_EQL,
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
     KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                              KC_6,     KC_7,     KC_8,     KC_9,     KC_0,
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
-    KC_LBRC,  KC_RBRC,  KC_LCBR,  KC_RCBR,  KC_GRV,                            KC_BSLS,  OS_CTRL,  OS_SHFT,  OS_CMD,   OS_ALT,
+    KC_LBRC,  KC_RBRC,  KC_LCBR,  KC_RCBR,  KC_GRV,                            KC_BSLS,  KC_LPRN,  KC_RPRN,  _______,  _______,
 //╰─────────┴─────────┼─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┼─────────┴─────────╯
                                   _______,  _______,  KC_RTAB,       _______,  _______,  _______
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
@@ -70,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
     OS_ALT,   OS_CMD,   OS_SHFT,  OS_CTRL,  RGB_TOG,                           KC_INS,   KC_F9,    KC_F10,   KC_F11,   KC_F12,
 //╰─────────┴─────────┼─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┼─────────┴─────────╯
-                                  _______,  _______,  _______,       RESET,    _______,  _______
+                                  _______, DF(_SEMI),DF(_CANARY),    RESET,    _______,  _______
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 )
 
@@ -238,23 +251,25 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
         }
     }
 
-    /* animation timer */
-    if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-        anim_timer = timer_read32();
-        animate_luna();
-    }
-
     /* this fixes the screen on and off bug */
     if (current_wpm > 0) {
         oled_on();
         anim_sleep = timer_read32();
+
+        /* animation timer */
+        if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
+            anim_timer = timer_read32();
+            animate_luna();
+        }
+    } else if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
+        oled_off();
     }
 }
 
 /* KEYBOARD PET END */
 
 void render_mod_indicator(const char *data, oneshot_state state) {
-    oled_write_P(data, state == os_down_unused || state == os_up_queued);
+    oled_write(data, state == os_down_unused || state == os_up_queued);
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -279,6 +294,9 @@ static void print_status_narrow(void) {
     switch (get_highest_layer(default_layer_state)) {
         case _CANARY:
             oled_write("CNARY", false);
+            break;
+        case _SEMI:
+            oled_write("SEMI ", false);
             break;
         default:
             oled_write("UNDEF", false);
@@ -310,10 +328,10 @@ static void print_status_narrow(void) {
 
     /* caps lock */
     oled_set_cursor(0, 8);
-    render_mod_indicator(PSTR("A"), os_alt_state);
-    render_mod_indicator(PSTR("G"), os_cmd_state);
-    render_mod_indicator(PSTR("S"), os_shft_state);
-    render_mod_indicator(PSTR("C"), os_ctrl_state);
+    render_mod_indicator("A", os_alt_state);
+    render_mod_indicator("G", os_cmd_state);
+    render_mod_indicator("S", os_shft_state);
+    render_mod_indicator("C", os_ctrl_state);
 
     /* KEYBOARD PET RENDER START */
 
@@ -335,9 +353,10 @@ bool oled_task_user(void) {
     if (is_keyboard_master()) {
         print_status_narrow();
     } else if (true) {
-        oled_write_ln_P(PSTR(""), false);
-        oled_write_ln_P(PSTR(""), false);
-        oled_write_P(PSTR("    sweeeeep"), false);
+        for (int i = 0; i < 8 ; i++) {
+            oled_write_P(PSTR("sweeeeep "), false);
+        }
+        oled_write_P(PSTR("sweeeeep"), false);
     } else {
         //render_logo_text();
     }
