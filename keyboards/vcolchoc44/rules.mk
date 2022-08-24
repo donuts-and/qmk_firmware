@@ -1,0 +1,15 @@
+# MCU name
+MCU = RP2040
+
+# Bootloader selection
+BOOTLOADER = rp2040
+
+# RP2040-specific options
+PICO_INTRINSICS_ENABLED = no # ATM Unsupported by ChibiOS.
+SERIAL_DRIVER = vendor
+
+# RGB_MATRIX_ENABLE = yes
+# RGB_MATRIX_DRIVER = WS2812
+
+RGBLIGHT_ENABLE = yes
+RGBLIGHT_DRIVER = WS2812
