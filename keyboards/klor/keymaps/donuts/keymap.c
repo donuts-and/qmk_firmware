@@ -13,16 +13,13 @@
                                         █         █    █▄▄▄▄▄▄▄▄    ▀▀▀▄▄▄▄▄▄▀▀▀        █          █
 
                                         ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-                                        D E F A U L T
+                                        D O N U T S
 
 */
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 #include <string.h>
 #include "klor.h"
-#ifdef HAPTIC_ENABLE
-#include "drivers/haptic/DRV2605L.h"
-#endif //HAPTIC ENABLE
 
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -37,6 +34,7 @@
 enum klor_layers {
     _SEMI,
     _CANARY,
+    _APT,
     _LOWER,
     _RAISE,
     _ADJUST
@@ -81,7 +79,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
-
 [_CANARY] = LAYOUT_saegewerk(
 //╭─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────╮
     KC_W,     KC_L,     KC_Y,     KC_P,     KC_B,                              KC_Z,     KC_F,     KC_O,     KC_U,     KC_SCLN,
@@ -91,6 +88,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,     KC_J,     KC_V,     KC_D,     KC_K,     _______,       _______,  KC_X,     KC_H,     KC_SLSH,  KC_COMM,  KC_DOT, 
 //╰─────────┴─────────┴─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┴─────────┴─────────╯
                                   LOWER,    KC_LSFT,  KC_TAB,        KC_QUOT,  KC_SPC,   RAISE
+//                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
+),
+
+[_APT] = LAYOUT_saegewerk(
+//╭─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────╮
+    KC_W,     KC_F,     KC_G,     KC_D,     KC_V,                              KC_Q,     KC_L,     KC_U,     KC_O,     KC_Y,
+//├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
+    KC_R,     KC_S,     KC_T,     KC_H,     KC_B,                              KC_J,     KC_N,     KC_E,     KC_A,     KC_I,   
+//├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
+    KC_X,     KC_C,     KC_M,     KC_P,     KC_K,     _______,       _______,  KC_Z,     KC_COMM,  KC_DOT,   KC_QUOT,  KC_SLSH,
+//╰─────────┴─────────┴─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┴─────────┴─────────╯
+                                  LOWER,    KC_LSFT,  KC_TAB,        KC_SCLN,  KC_SPC,   RAISE
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
@@ -126,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
     OS_ALT,   OS_CMD,   OS_SHFT,  OS_CTRL,  RGB_TOG,  _______,       _______,  KC_INS,   KC_F9,    KC_F10,   KC_F11,   KC_F12, 
 //╰─────────┴─────────┴─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┴─────────┴─────────╯
-                                  _______, DF(_SEMI),DF(_CANARY),    _______,  _______,  _______
+                                  _______, DF(_SEMI), DF(_APT),      _______,  _______,  _______
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 )
 
@@ -300,19 +309,22 @@ int layerstate = 0;
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
       switch (get_highest_layer(layer_state | default_layer_state)) {
-            case 0:
+            case _SEMI:
                 strcpy ( layer_state_str, "BASE SEMI");
                 break;
-            case 1:
+            case _APT:
+                strcpy ( layer_state_str, "BASE APT");
+                break;
+            case _CANARY:
                 strcpy ( layer_state_str, "BASE CANARY");
                 break;
-            case 2:
+            case _LOWER:
                 strcpy ( layer_state_str, "LOWER");
                 break;
-            case 3:
+            case _RAISE:
                 strcpy ( layer_state_str, "RAISE");
                 break;
-            case 4:
+            case _ADJUST:
                 strcpy ( layer_state_str, "ADJUST");
                 break;
             default:
@@ -353,19 +365,22 @@ bool oled_task_kb(void) {
 
         
         switch (get_highest_layer(layer_state | default_layer_state)) {
-            case 0:
+            case _SEMI:
                 strcpy ( layer_state_str, "BASE SEMI");
                 break;
-            case 1:
+            case _APT:
+                strcpy ( layer_state_str, "BASE APT");
+                break;
+            case _CANARY:
                 strcpy ( layer_state_str, "BASE CANARY");
                 break;
-            case 2:
+            case _LOWER:
                 strcpy ( layer_state_str, "LOWER");
                 break;
-            case 3:
+            case _RAISE:
                 strcpy ( layer_state_str, "RAISE");
                 break;
-            case 4:
+            case _ADJUST:
                 strcpy ( layer_state_str, "ADJUST");
                 break;
             default:
@@ -488,6 +503,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case DF(_CANARY):
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_CANARY);
+            }
+            return false;
+        case DF(_APT):
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_APT);
             }
             return false;
     }
