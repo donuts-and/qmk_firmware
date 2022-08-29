@@ -1,8 +1,9 @@
 #pragma once
 
-#define IGNORE_MOD_TAP_INTERRUPT 
+#define TAPPING_TERM 200
+#define RETRO_TAPPING
 
 #define COMBO_VARIABLE_LEN
-#define COMBO_TERM 35
+#define COMBO_TERM 40
 
 #define COMBO_ONLY_FROM_LAYER 1
