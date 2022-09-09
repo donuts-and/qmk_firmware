@@ -47,10 +47,10 @@ enum keycodes {
               K33, K34, K35, K36, K37, K38 \
   ) \
   LAYOUT_sweeeeep( \
-    K01,         K02, K03, K04, K05, K06, K07, K08, K09, K0A, \
-    K11,         K12, K13, K14, K15, K16, K17, K18, K19, K1A, \
-    LSFT_T(K21), K22, K23, K24, K25, K26, K27, K28, K29, LSFT_T(K2A), \
-                 K33, K34, K35, K36, K37, K38 \
+    K01, K02, K03, K04, K05, K06, K07, K08, K09, K0A, \
+    K11, K12, K13, K14, K15, K16, K17, K18, K19, K1A, \
+    K21, K22, K23, K24, K25, K26, K27, K28, K29, K2A, \
+              K33, K34, K35, K36, K37, K38 \
     )
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
     KC_X,     KC_J,     KC_B,     KC_M,     KC_Q,                              KC_P,     KC_G,     KC_COMM,  KC_DOT,   KC_SLSH,
 //╰─────────┴─────────┼─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┼─────────┴─────────╯
-                                  LOWER,    KC_SPC,   KC_TAB,        KC_SCLN,  KC_SPC,   RAISE
+                                  LOWER,    KC_LSFT,  KC_TAB,        KC_SCLN,  KC_SPC,   RAISE
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
     KC_X,     KC_C,     KC_M,     KC_P,     KC_K,                              KC_Z,     KC_COMM,  KC_DOT,   KC_QUOT,  KC_SLSH,
 //╰─────────┴─────────┼─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┼─────────┴─────────╯
-                                  LOWER,    KC_SPC,   KC_TAB,        KC_SCLN,  KC_SPC,   RAISE
+                                  LOWER,    KC_LSFT,  KC_TAB,        KC_SCLN,  KC_SPC,   RAISE
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
