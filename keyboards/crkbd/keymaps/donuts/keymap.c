@@ -1,21 +1,3 @@
-/*
-Copyright 2019 @foostan
-Copyright 2020 Drashna Jaelre <@drashna>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
@@ -23,6 +5,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum layer_names {
     _SEMI,
     _CANARY,
+    _APT,
     _LOWER,
     _RAISE,
     _ADJUST
@@ -47,13 +30,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_SEMI] = LAYOUT_split_3x6_3(
 //╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
-    _______,  KC_F,     KC_L,     KC_H,     KC_V,     KC_Z,                              KC_SCLN,  KC_W,     KC_U,     KC_O,     KC_Y,     _______,
+    _______,  KC_F,     KC_L,     KC_H,     KC_V,     KC_Z,                              KC_QUOT,  KC_W,     KC_U,     KC_O,     KC_Y,     _______,
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼
     _______,  KC_S,     KC_R,     KC_N,     KC_T,     KC_K,                              KC_C,     KC_D,     KC_E,     KC_A,     KC_I,     _______,
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼
     _______,  KC_X,     KC_J,     KC_B,     KC_M,     KC_Q,                              KC_P,     KC_G,     KC_COMM,  KC_DOT,   KC_SLSH,  _______,
 //╰─────────┴─────────┴─────────┴─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┴─────────┴─────────┴─────────╯
-                                            LOWER,    KC_LSFT,  KC_TAB,        KC_QUOT,  KC_SPC,   RAISE
+                                            LOWER,    KC_SPC,   KC_LSFT,       KC_LSFT,  KC_SPC,   RAISE
+//                                        ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
+),
+
+[_APT] = LAYOUT_split_3x6_3(
+//╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────┬─────────╮
+    _______,  KC_W,     KC_F,     KC_G,     KC_D,     KC_V,                              KC_Q,     KC_L,     KC_U,     KC_O,     KC_Y,     _______,
+//├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼
+    _______,  KC_R,     KC_S,     KC_T,     KC_H,     KC_B,                              KC_J,     KC_N,     KC_E,     KC_A,     KC_I,     _______,
+//├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼
+    _______,  KC_X,     KC_C,     KC_M,     KC_P,     KC_K,                              KC_Z,     KC_COMM,  KC_DOT,   KC_QUOT,  KC_SLSH,  _______,
+//╰─────────┴─────────┴─────────┴─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┴─────────┴─────────┴─────────╯
+                                            LOWER,    KC_SPC,   KC_LSFT,       KC_LSFT,  KC_SPC,   RAISE
 //                                        ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
@@ -65,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼
     _______,  KC_Q,     KC_J,     KC_V,     KC_D,     KC_K,                              KC_X,     KC_H,     KC_SLSH,  KC_COMM,  KC_DOT,   _______,
 //╰─────────┴─────────┴─────────┴─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┴─────────┴─────────┴─────────╯
-                                            LOWER,    KC_LSFT,  KC_TAB,        KC_QUOT,  KC_SPC,   RAISE
+                                            LOWER,    KC_SPC,   KC_LSFT,       KC_LSFT,  KC_SPC,   RAISE
 //                                        ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
@@ -77,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼
     _______,  OS_ALT,   OS_CMD,   OS_SHFT,  OS_CTRL,  _______,                           _______,  _______,  _______,  _______,  _______,  _______,
 //╰─────────┴─────────┴─────────┴─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┴─────────┴─────────┴─────────╯
-                                            _______,  _______,  _______,       _______,  KC_ENT,   _______
+                                            _______,  _______,  _______,       KC_SCLN,  _______,  _______
 //                                        ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
@@ -89,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼
     _______,  KC_LBRC,  KC_RBRC,  KC_LCBR,  KC_RCBR,  KC_GRV,                            KC_BSLS,  KC_LPRN,  KC_RPRN,  _______,  _______,  _______,
 //╰─────────┴─────────┴─────────┴─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┴─────────┴─────────┴─────────╯
-                                            _______,  _______,  KC_RTAB,       _______,  _______,  _______
+                                            _______,  _______,  KC_TAB,        _______,  _______,  _______
 //                                        ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
@@ -101,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┼
     _______,  OS_ALT,   OS_CMD,   OS_SHFT,  OS_CTRL,  RGB_TOG,                           KC_INS,   KC_F9,    KC_F10,   KC_F11,   KC_F12,   _______,
 //╰─────────┴─────────┴─────────┴─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┴─────────┴─────────┴─────────╯
-                                            _______, DF(_SEMI),DF(_CANARY),    _______,  _______,  _______
+                                            _______,  DF(_SEMI),DF(_APT),      _______,  _______,  _______
 //                                        ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 )
 
@@ -316,6 +311,9 @@ static void print_status_narrow(void) {
         case _SEMI:
             oled_write("SEMI ", false);
             break;
+        case _APT:
+            oled_write("APT  ", false);
+            break;
         default:
             oled_write("UNDEF", false);
     }
@@ -474,7 +472,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         set_keylog(keycode, record);
     }
-    
+
     switch (keycode) {
         /* KEYBOARD PET STATUS START */
         case KC_LCTL:

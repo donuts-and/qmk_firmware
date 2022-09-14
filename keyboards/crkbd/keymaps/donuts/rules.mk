@@ -12,3 +12,5 @@ SRC += users/callum/oneshot.c
 COMBO_ENABLE = yes
 
 WPM_ENABLE = yes
+
+CONVERT_TO = kb2040
