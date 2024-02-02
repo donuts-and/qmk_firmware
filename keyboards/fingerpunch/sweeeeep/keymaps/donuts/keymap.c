@@ -3,9 +3,8 @@
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
-    _SEMI,
+    _DH,
     _CANARY,
-    _APT,
     _LOWER,
     _RAISE,
     _ADJUST
@@ -55,31 +54,19 @@ enum keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-[_SEMI] = LAYOUT_sweeeeep_pinky_shift(
+[_DH] = LAYOUT_sweeeeep(
 //╭─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────╮
-    KC_F,     KC_L,     KC_H,     KC_V,     KC_Z,                              KC_QUOT,  KC_W,     KC_U,     KC_O,     KC_Y,
+    KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,                              KC_J,     KC_L,     KC_U,     KC_Y,     KC_QUOT,
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
-    KC_S,     KC_R,     KC_N,     KC_T,     KC_K,                              KC_C,     KC_D,     KC_E,     KC_A,     KC_I,
+    KC_A,     KC_R,     KC_S,     KC_T,     KC_G,                              KC_M,     KC_N,     KC_E,     KC_I,     KC_O,
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
-    KC_X,     KC_J,     KC_B,     KC_M,     KC_Q,                              KC_P,     KC_G,     KC_COMM,  KC_DOT,   KC_SLSH,
+    KC_Z,     KC_X,     KC_C,     KC_D,     KC_V,                              KC_K,     KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,
 //╰─────────┴─────────┼─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┼─────────┴─────────╯
                                   LOWER,    KC_LSFT,  KC_TAB,        KC_SCLN,  KC_SPC,   RAISE
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
-[_APT] = LAYOUT_sweeeeep_pinky_shift(
-//╭─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────╮
-    KC_W,     KC_F,     KC_G,     KC_D,     KC_V,                              KC_Q,     KC_L,     KC_U,     KC_O,     KC_Y,
-//├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
-    KC_R,     KC_S,     KC_T,     KC_H,     KC_B,                              KC_J,     KC_N,     KC_E,     KC_A,     KC_I,
-//├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
-    KC_X,     KC_C,     KC_M,     KC_P,     KC_K,                              KC_Z,     KC_COMM,  KC_DOT,   KC_QUOT,  KC_SLSH,
-//╰─────────┴─────────┼─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┼─────────┴─────────╯
-                                  LOWER,    KC_LSFT,  KC_TAB,        KC_SCLN,  KC_SPC,   RAISE
-//                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
-),
-
-[_CANARY] = LAYOUT_sweeeeep_pinky_shift(
+[_CANARY] = LAYOUT_sweeeeep(
 //╭─────────┬─────────┬─────────┬─────────┬─────────╮                        ╭─────────┬─────────┬─────────┬─────────┬─────────╮
     KC_W,     KC_L,     KC_Y,     KC_P,     KC_B,                              KC_Z,     KC_F,     KC_O,     KC_U,     KC_SCLN,
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
@@ -111,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
     KC_LBRC,  KC_RBRC,  KC_LCBR,  KC_RCBR,  KC_GRV,                            KC_BSLS,  KC_LPRN,  KC_RPRN,  _______,  _______,
 //╰─────────┴─────────┼─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┼─────────┴─────────╯
-                                  _______,  _______,  KC_RTAB,       _______,  _______,  _______
+                                  _______,  _______,  _______,       _______,  _______,  _______
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 ),
 
@@ -123,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //├─────────┼─────────┼─────────┼─────────┼─────────┼                        ├─────────┼─────────┼─────────┼─────────┼─────────┼
     OS_ALT,   OS_CMD,   OS_SHFT,  OS_CTRL,  RGB_TOG,                           KC_INS,   KC_F9,    KC_F10,   KC_F11,   KC_F12,
 //╰─────────┴─────────┼─────────┼─────────┼─────────┼─────────╮    ╭─────────├─────────┼─────────┼─────────┼─────────┴─────────╯
-                                  _______,  DF(_SEMI),DF(_APT),      RESET,    _______,  _______
+                                  _______,  _______,  _______,       RESET,    _______,  _______
 //                              ╰─────────┴─────────┴─────────╯    ╰─────────┴─────────┴─────────╯
 )
 
@@ -189,11 +176,8 @@ static void print_status_narrow(void) {
         case _CANARY:
             oled_write("CNARY", false);
             break;
-        case _SEMI:
-            oled_write("SEMI ", false);
-            break;
-        case _APT:
-            oled_write("APT  ", false);
+        case _DH:
+            oled_write("CK-DH", false);
             break;
         default:
             oled_write("UNDEF", false);
@@ -208,7 +192,7 @@ static void print_status_narrow(void) {
 
     switch (get_highest_layer(layer_state)) {
         case _CANARY:
-        case _SEMI:
+        case _DH:
             oled_write("BASE ", false);
             break;
         case _RAISE:
